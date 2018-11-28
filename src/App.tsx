@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-import HelloWorld from './components/HelloWorld'
+import HelloWorld from './components/HelloWorld';
 
 
 class App extends React.Component {

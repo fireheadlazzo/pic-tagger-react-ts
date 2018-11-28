@@ -12,6 +12,8 @@
     ]
   },
   "rules": {
-    "jsx-no-lambda": false
+    "no-console": false,
+    "jsx-no-lambda": false,
+    "semicolon": [true, "always"]
   }
 }
