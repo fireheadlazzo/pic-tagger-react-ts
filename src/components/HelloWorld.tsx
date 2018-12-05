@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as React from 'react';
 
 class HelloWorld extends React.Component<any, any> {
-  constructor(props: any)
+  constructor(props: string)
   {
     super(props);
     this.state = 
