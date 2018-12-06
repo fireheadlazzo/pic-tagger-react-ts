@@ -17,7 +17,9 @@ class HelloWorld extends React.Component<any, any> {
     axios.get('/api/photo/12')
     .then(response => {
       // tslint:disable-next-line:no-console
-      console.log(response);
+      console.log('response', response);
+      // tslint:disable-next-line:no-console
+      console.log('image', this.state.image);
       this.setState({image: response.data});
     });
   }
@@ -29,7 +31,10 @@ class HelloWorld extends React.Component<any, any> {
           onChange={(e) => this.setState({target: e.target.value})}
           onSubmit={() => this.setState({image: axios.get(`/api/photos/${this.state.target}`)})}
         />
+        <br/>
+        {this.state.image}
         {this.state.print}
+        {this.state.target}
         <img src={this.state.image}/>
       </div>
     );
