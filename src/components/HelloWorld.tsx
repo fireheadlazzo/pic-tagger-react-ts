@@ -14,12 +14,10 @@ class HelloWorld extends React.Component<any, any> {
   }
 
   public componentDidMount() {
-    axios.get('/api/photo/12')
+    console.log('image', this.state.image);
+    axios.get('http://localhost:3001/api/photo/12')
     .then(response => {
-      // tslint:disable-next-line:no-console
       console.log('response', response);
-      // tslint:disable-next-line:no-console
-      console.log('image', this.state.image);
       this.setState({image: response.data});
     });
   }
