@@ -62,5 +62,5 @@ app.put('/api/edit_title', editTitle);
 app.put('/api/edit_tags', editTagsMain);
 app.put('/api/edit_tags_mass', applyTagToMass);
 
-
+// tslint:disable-next-line:no-console
 app.listen(port, () => console.log(`Listening for requests on port ${port}`));
