@@ -38,7 +38,7 @@ massive(process.env.DB_CONNECTION)
 app.use( express.static( `${__dirname}/../build` ) );
 
 app.get('/api/photos', getAllPics);       //for loading all (or some) pictures
-app.get('/api/photos/:pid', getPhoto);    //for loading a specific picture
+app.get('/api/photo/:pid', getPhoto);    //for loading a specific picture
 app.get('/api/tags/all', getAllTags);     //Gets a list of tag names. Should be listed before getPhotoTags to avoid conflicts
 app.get('/api/tags/:pid', getPhotoTags);
 app.get('/api/search', searchPhotos);     //send a string of '+' delimited substrings
@@ -63,4 +63,4 @@ app.put('/api/edit_tags', editTagsMain);
 app.put('/api/edit_tags_mass', applyTagToMass);
 
 
-app.listen(port);
+app.listen(port, () => console.log(`Listening for requests on port ${port}`));
