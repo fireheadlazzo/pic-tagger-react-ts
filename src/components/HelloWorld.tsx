@@ -12,6 +12,12 @@ class HelloWorld extends React.Component<any, any> {
       target: null
     };
   }
+
+  public componentDidMount() {
+    axios.get('/api/photo/1')
+    .then(response => this.setState({image: response.data}));
+  }
+
   public render() {
     return (
       <div>
