@@ -15,7 +15,7 @@ class HelloWorld extends React.Component<any, any> {
 
   public componentDidMount() {
     console.log('image', this.state.image);
-    axios.get('http://localhost:3001/api/photo/12')
+    axios.get('https://localhost:3001/api/photo/12')
     .then(response => {
       console.log('response', response);
       this.setState({image: response.data});
