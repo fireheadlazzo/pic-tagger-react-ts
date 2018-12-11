@@ -1,6 +1,7 @@
 const express = require('express');
 const { json } = require('body-parser');
 const massive = require('massive');
+const cors = require('cors');
 // const fbConfig = require('./firebaseAuth');
 require('dotenv').config();
 
@@ -29,6 +30,7 @@ const {
 
 const app = express();
 app.use(json());
+app.use(cors());
 
 //Connect Massive to Heroku
 massive(process.env.DB_CONNECTION)
