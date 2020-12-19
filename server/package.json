@@ -8,6 +8,7 @@
     "build": "tsc -p tsconfig.json",
     "postbuild": "copy src\\config.json build",
     "start": "nodemon build/index.js",
+    "test": "echo 'no test script'",
     "copy": "copy *.json build"
   },
   "author": "Anthony Magno",
