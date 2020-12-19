@@ -1,24 +1,19 @@
 import path from "path";
 import nconf from "nconf";
 
-nconf.overrides({
-    // SQL_HOST: "",
-    // SQL_USER: "",
-    // SQL_PASSWORD: "",
-    // SQL_DATABASE: "",
-    // SQL_PORT: "",
-});
+nconf.overrides({});
 
-nconf.env().argv();
+nconf.env().argv(); // TODO: What does this do?
 
 nconf.file({file: path.join(__dirname, "config.json")});
 
 nconf.defaults({
-    SQL_HOST: "DEFAULT_SQL_HOST",
-    SQL_USER: "DEFAULT_SQL_USER",
-    SQL_PASSWORD: "DEFAULT_SQL_PASSWORD",
-    SQL_DATABASE: "DEFAULT_SQL_DATABASE",
-    SQL_PORT: "DEFAULT_SQL_PORT",
+    PORT: 8000,
+    SQL_USER: "postgres",
+    SQL_DATABASE: "postgres",
+    SQL_HOST: "",
+    SQL_PASSWORD: "",
+    SQL_PORT: "5432",
 });
 
 export default nconf;
