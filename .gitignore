@@ -1,8 +1,11 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-# sode server files
+# node server files
 server/node_modules
 server/build
+
+# env variables
+**/config.json
 
 # misc
 .DS_Store
