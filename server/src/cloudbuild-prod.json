@@ -21,17 +21,6 @@
                 "."
             ],
             "dir": "server"
-        },
-        {
-            "name": "gcr.io/cloud-builders/gcloud",
-            "args": [
-                "run", "deploy", "$PROJECT_ID-node",
-                "--image", "gcr.io/$PROJECT_ID/server:latest",
-                "--region", "us-central1",
-                "--platform", "managed",
-                "--allow-unauthenticated"
-            ],
-            "dir": "server"
         }
     ],
     "timeout": "1000s",
