@@ -3,7 +3,10 @@ Render method must be declared as private, public, or protected
   private - 
   public - 
   protected - 
+
 Q: Why can't Component be imported alongside React anymore?
+A: 
+Q: What is a helm file? What does it do?
 A: 
 
 SASS
