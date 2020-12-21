@@ -7,6 +7,14 @@
             "dir": "server"
         },
         {
+            "name": "gcr.io/cloud-builders/gcloud",
+            "entrypoint": "bash",
+            "args": [
+                "-c",
+                "gcloud secrets versions access latest --secret=SQL_CONNECTION_INFO --format='get(payload.data)' | tr '_-' '/+' | base64 -d > config.txt"
+            ]
+        },
+        {
             "name": "node:13",
             "entrypoint": "npm",
             "args": ["run", "build"],
