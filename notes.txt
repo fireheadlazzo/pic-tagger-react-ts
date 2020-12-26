@@ -8,5 +8,14 @@ Q: Why can't Component be imported alongside React anymore?
 A: 
 Q: What is a helm file? What does it do?
 A: 
+Q: How does the example build process work? Why does it appear to do things multiple times?
+A: Because it does, and for a good reason.
+   First, it runs npm install while it's still in the pre-build phase
+   Next, it runs all of the unit tests. If these fail, the whole build will fail
+   Next it builds the application like normal
+   Then it does Docker stuff. It sets the docker context to the latest build
+   Then it runs Docker build
+     This triggers the Dockerfile script, which copies the relevant files from the build
+     then npm install must be run again on the new build/ directory
 
 SASS

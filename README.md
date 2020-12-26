@@ -27,6 +27,8 @@ On the Hosting side:
 
 ### Build Pipeline
 
+#### [TODO: Go back and check all of this from square 1]
+
 - Enable Cloud Build <https://console.cloud.google.com/marketplace/product/google/cloudbuild.googleapis.com>
 - Set up a build trigger under Cloud Build <https://console.cloud.google.com/cloud-build/triggers>
   - connect github repo to your GCP account
@@ -56,3 +58,8 @@ gcloud iam service-accounts add-iam-policy-binding \
     --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com \
     --role=roles/iam.serviceAccountUser
 ```
+
+- Trigger a build. It should build successfully and create a new container in the container registry
+- From the Container Registry, find the `latest` image and select Deploy to Cloud Run
+  - service name `pic-tagger-v2-node`
+  - Deploy one revision from `gcr.io/pic-tagger-v2/server:latest`
