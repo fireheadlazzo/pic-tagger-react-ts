@@ -8,6 +8,7 @@ nconf.env().argv(); // TODO: What does this do?
 nconf.file({file: path.join(__dirname, "config.json")});
 
 nconf.defaults({
+    PROJECT_NAME: "",
     IMAGE_BUCKET: "",
     PORT: 8000,
     SQL_USER: "postgres",
