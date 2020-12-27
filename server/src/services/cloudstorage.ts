@@ -2,8 +2,10 @@ import {NextFunction, Request, Response} from "express";
 import {Bucket, Storage, GetBucketsResponse} from "@google-cloud/storage";
 import config from '../config';
 import {UploadRequest} from "../models/upload-request";
+import path from "path";
 
 const storage = new Storage({
+  keyFilename: path.join(__dirname, config.get("SERVICE_ACCOUNT_CREDENTIALS")),
   projectId: config.get("PROJECT_NAME")
 });
 
