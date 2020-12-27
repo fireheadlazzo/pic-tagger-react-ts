@@ -9,16 +9,16 @@
     "postbuild": "npm run copy-json",
     "start": "node build/index.js",
     "test": "echo 'no test script'",
-    "copy-json": "copy src/**/*.json build",
+    "copy-json": "cpx src/**/*.json build",
     "letsgo": "npm run build && npm run start"
   },
   "author": "Anthony Magno",
   "license": "GPL-3.0-or-later",
   "_moduleAliases": {
     "config": "build/config",
-    "controllers" : "build/controllers",
-    "models" : "build/models",
-    "services" : "build/services"
+    "controllers": "build/controllers",
+    "models": "build/models",
+    "services": "build/services"
   },
   "dependencies": {
     "@google-cloud/storage": "^5.7.0",
@@ -30,7 +30,7 @@
     "@types/express": "^4.17.9",
     "@types/nconf": "^0.10.0",
     "@types/node": "^14.14.14",
-    "copy": "^0.3.2",
+    "cpx": "^1.5.0",
     "nodemon": "^2.0.6",
     "trash-cli": "^4.0.0",
     "ts-node": "^9.1.1",
