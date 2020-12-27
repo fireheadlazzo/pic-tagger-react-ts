@@ -11,7 +11,7 @@
             "entrypoint": "bash",
             "args": [
                 "-c",
-                "gcloud secrets versions access latest --secret=SQL_CONNECTION_INFO --format='get(payload.data)' | tr '_-' '/+' | base64 -d > config.json"
+                "gcloud secrets versions access latest --secret=CONFIG --format='get(payload.data)' | tr '_-' '/+' | base64 -d > config.json"
             ],
             "dir": "server/src"
         },

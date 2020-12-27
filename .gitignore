@@ -9,5 +9,7 @@ server/build
 
 # misc
 .DS_Store
+.vscode
+.idea
 
 npm-debug.log*
