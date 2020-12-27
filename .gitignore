@@ -7,7 +7,12 @@ server/build
 # env variables
 **/config.json
 
+# credentials
+**/cs-credentials.json
+
 # misc
 .DS_Store
+.vscode
+.idea
 
 npm-debug.log*
