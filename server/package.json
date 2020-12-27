@@ -6,15 +6,24 @@
   "scripts": {
     "prebuild": "trash build",
     "build": "tsc -p tsconfig.json",
-    "postbuild": "copy src/**/*.json build",
-    "start": "nodemon build/index.js",
+    "postbuild": "npm run copy-json",
+    "start": "node build/index.js",
     "test": "echo 'no test script'",
-    "copy": "copy *.json build"
+    "copy-json": "copy src/**/*.json build",
+    "letsgo": "npm run build && npm run start"
   },
   "author": "Anthony Magno",
   "license": "GPL-3.0-or-later",
+  "_moduleAliases": {
+    "config": "build/config",
+    "controllers" : "build/controllers",
+    "models" : "build/models",
+    "services" : "build/services"
+  },
   "dependencies": {
+    "@google-cloud/storage": "^5.7.0",
     "express": "^4.17.1",
+    "module-alias": "^2.2.2",
     "nconf": "^0.11.0"
   },
   "devDependencies": {
