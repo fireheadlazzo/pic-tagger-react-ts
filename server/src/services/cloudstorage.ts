@@ -3,11 +3,14 @@ import {Bucket, Storage, GetBucketsResponse} from "@google-cloud/storage";
 import config from '../config';
 import {UploadRequest} from "../models/upload-request";
 
-const storage = new Storage();
+const storage = new Storage({
+  projectId: config.get("PROJECT_NAME")
+});
 
 export function sendImageToGCS(req: Request & UploadRequest, res: Response, next: NextFunction) {
+  console.log("got here");
   if (!req.file) {
-    console.log(req)
+  //   console.log(req)
     return next();
   }
   console.log(Object.keys(req.file));
