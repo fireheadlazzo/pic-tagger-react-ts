@@ -1,8 +1,8 @@
 # PicTagger v2
 
-A complete rework of a project I did in school. I was proud of it at the time, but it was janky, slow, and destroyed databases with exponential growth. This project aims to fix all of that and even add a fresh coat of paint  
-Created with 'create-react-app' + typescript  
-Also I'll probably learn SASS while I'm here  
+A complete rework of a project I did in school. I was proud of it at the time, but it was janky, slow, and destroyed databases with exponential growth. This project aims to fix all of that and even add a fresh coat of paint
+Created with 'create-react-app' + typescript
+Also I'll probably learn SASS while I'm here
 **Bootstrapped with create-react-app + typescript**
 
 ## SETUP
@@ -13,12 +13,13 @@ On the Hosting side:
 - Set up new GCP project
 - Enable billing <https://console.cloud.google.com/billing>
 
-### Database
+### Database and Storage
 
 - Enable SQL database (pg12) <https://console.cloud.google.com/sql/instances>
   - get database connection info (host, password, database, user)
   - copy those values into `server/src/config.json` and add `server/src/config.json` to `.gitignore`
   - run database migrations (under `db` folder)
+- Create a new bucket called "images" <https://console.cloud.google.com/storage/browser>
 
 ### Secrets
 
@@ -26,6 +27,8 @@ On the Hosting side:
   - add SQL values to secret manager
 
 ### Build Pipeline
+
+#### [TODO: Go back and check all of this from square 1]
 
 - Enable Cloud Build <https://console.cloud.google.com/marketplace/product/google/cloudbuild.googleapis.com>
 - Set up a build trigger under Cloud Build <https://console.cloud.google.com/cloud-build/triggers>
@@ -56,3 +59,8 @@ gcloud iam service-accounts add-iam-policy-binding \
     --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com \
     --role=roles/iam.serviceAccountUser
 ```
+
+- Trigger a build. It should build successfully and create a new container in the container registry
+- From the Container Registry, find the `latest` image and select Deploy to Cloud Run
+  - service name `pic-tagger-v2-node`
+  - Deploy one revision from `gcr.io/pic-tagger-v2/server:latest`
