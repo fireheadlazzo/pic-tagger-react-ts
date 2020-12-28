@@ -1,5 +1,3 @@
-import { tableMap } from "./constants";
-
 export class Tag {
     constructor(value?: any){
         if(!value) {
@@ -20,7 +18,7 @@ export class Tag {
     public id?: number;
     public name?: string;
     public type?: number;
-    public images?: Number[];
+    public images?: number[];
     public created_at?: Date;
     public updated_at?: Date;
     public deleted_at?: Date;
@@ -28,5 +26,5 @@ export class Tag {
     public updated_by?: string;
 
     public static primaryKey: string = "id";
-    public static columns: String[] = ["name", "type", "images", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
+    public static columns: string[] = ["name", "type", "images", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
 }
