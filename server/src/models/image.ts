@@ -1,8 +1,13 @@
-import { tableMap } from "./constants";
-
 interface IDetails {
-    height: number;
-    width: number;
+    metadata: {
+        height: number;
+        width: number;
+    },
+    uploadInfo: {
+        originalName: string;
+        bucket: string;
+        fileName: string;
+    }
 };
 
 export class Image {
@@ -24,7 +29,7 @@ export class Image {
 
     public id?: number;
     public url?: string;
-    public tags?: Number[];
+    public tags?: number[];
     public details?: IDetails;
     public created_at?: Date;
     public updated_at?: Date;
@@ -33,5 +38,5 @@ export class Image {
     public updated_by?: string;
 
     public static primaryKey: string = "id";
-    public static columns: String[] = ["url", "tags", "details", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
+    public static columns: string[] = ["url", "tags", "details", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
 }
