@@ -9,7 +9,7 @@ nconf.file({file: path.join(__dirname, "config.json")});
 
 nconf.defaults({
     PROJECT_NAME: "",
-    SERVICE_ACCOUNT_CREDENTIALS: "../cs-credentials.json",
+    STORAGE_CREDENTIALS: "../cs-credentials.json",
     IMAGE_BUCKET: "",
     PORT: 8000,
     SQL_USER: "postgres",

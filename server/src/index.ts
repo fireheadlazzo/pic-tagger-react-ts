@@ -1,15 +1,21 @@
 import express from 'express';
 import config from './config';
-import { listBuckets, sendImageToGCS } from './services/cloudstorage';
+import { createImage } from './controllers/create';
+import * as storage from './services/cloudstorage';
 
 const app = express();
 const PORT = config.get("PORT");
 
-app.get('/', listBuckets, (req, res) => res.send('GET / done'));
+app.get('/', storage.listBuckets, (req, res) => res.send('GET / done'));
 
 app.get('/a', (req, res) => res.send('GET /a done'));
 
-app.post('/', sendImageToGCS, (req, res) => res.send('POST / done'));
+app.post(
+  '/?',
+  storage.multer.single("file"),
+  storage.sendImageToGCS,
+  createImage,
+  (req, res) => res.send('POST / done'));
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
