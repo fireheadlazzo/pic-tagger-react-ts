@@ -17,5 +17,8 @@ A: Because it does, and for a good reason.
    Then it runs Docker build
      This triggers the Dockerfile script, which copies the relevant files from the build
      then npm install must be run again on the new build/ directory
+Q: Multer?
+A: It handles multi-part form data. It is not specifically an image handler, but it does load the file into memory and places limits on file sizes
+   In the example code, it gets passed "file" to indicate that it should pull req.body.file off, run it through multer, and put the file directly on req
 
 SASS
