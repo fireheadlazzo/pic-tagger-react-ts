@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "indent": [true,"spaces",2],
+    "array-type": [true, "array"],
+    "no-consecutive-blank-lines": true
+  }
+}
