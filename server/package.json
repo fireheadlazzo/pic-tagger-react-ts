@@ -12,7 +12,6 @@
     "copy-json": "cpx src/**/*.json build",
     "letsgo": "npm run build && npm run start"
   },
-  "author": "Anthony Magno",
   "license": "GPL-3.0-or-later",
   "_moduleAliases": {
     "config": "build/config",
