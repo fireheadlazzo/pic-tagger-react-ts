@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
-import { UploadRequest } from "../models/upload-request";
-import { Image } from "../models/image";
+import { UploadRequest } from "../models/interfaces/upload-request";
+import { Image } from "../models/objs/image";
 import { saveImage } from "../services/sql";
 
 export function createImage(req: Request & UploadRequest, res: Response) {
