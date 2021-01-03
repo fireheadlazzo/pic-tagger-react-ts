@@ -1,6 +1,6 @@
 import { PoolClient, QueryResult } from "pg";
 import { tableMap } from "../../../models/constants";
-import { Image } from "../../../models/image";
+import { Image } from "../../../models/objs/image";
 import cloudsql from "../database-adaptor";
 
 /**
