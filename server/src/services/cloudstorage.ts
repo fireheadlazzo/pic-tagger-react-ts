@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from "express";
 import {Bucket, Storage, GetBucketsResponse} from "@google-cloud/storage";
-import config from '../config';
+import config from "../config";
 import {UploadRequest} from "../models/interfaces/upload-request";
 import path from "path";
 import Multer from "multer";
