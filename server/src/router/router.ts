@@ -1,6 +1,7 @@
 import express from "express";
 import * as storage from "../services/cloudstorage";
-import { createImage } from "../controllers/create";
+import { createImage, getImage } from "../controllers/images";
+import * as constants from "../models/constants";
 
 class Router {
   constructor() {
@@ -12,16 +13,13 @@ class Router {
     /**
      * Images
      */
-    this.app.get("/", storage.listBuckets, (req, res) => res.send("GET / done"));
-
-    this.app.get("/a", (req, res) => res.send("GET /a done"));
+    this.app.get(`/${constants.imagesRoute}/:id`, getImage);
 
     this.app.post(
-      "/?",
+      `/${constants.imagesRoute}/?`,
       storage.multer.single("file"),
       storage.sendImageToGCS,
-      createImage,
-      (req, res) => res.send("POST / done")
+      createImage
     );
   }
 
