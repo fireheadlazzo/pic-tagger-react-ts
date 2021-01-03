@@ -59,8 +59,8 @@ export class Image {
         return {
             id: value.id,
             url: value.url,
-            tags: JSON.parse(value.tags),
-            details: JSON.parse(value.details),
+            tags: value.tags,
+            details: value.details,
             created_at: value.created_at,
             updated_at: value.deleted_at,
             deleted_at: value.deleted_at,

@@ -43,9 +43,9 @@ Images should each get a scaled-down thumbnail stored in the bucket.
 DONE 	Image POST
 DONE	Image POST cleanup
 DONE	Tighten the Image class constructor
-			Router cleanup
+DONE	Router cleanup
+DONE	Image GET by id
 			Tag POST
-			Image GET by id
 			Image GET list with all the trappings (pagination, order, etc)
 			Maybe a flag for thumbnail vs full-size would be fun. Could render full collections on one page with that
 			Image PUT general use

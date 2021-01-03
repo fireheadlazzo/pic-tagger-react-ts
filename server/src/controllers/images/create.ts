@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
-import { UploadRequest } from "../models/interfaces/upload-request";
-import { Image } from "../models/objs/image";
-import { saveImage } from "../services/sql";
+import { UploadRequest } from "../../models/interfaces/upload-request";
+import { Image } from "../../models/objs/image";
+import { saveImage } from "../../services/sql";
 
 export function createImage(req: Request & UploadRequest, res: Response) {
   console.log(`Creating new image for file [${req.file.bucket}/${req.file.path}]`)

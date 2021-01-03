@@ -48,20 +48,6 @@ export function sendImageToGCS(
   stream.end(req.file.buffer);
 }
 
-export function listBuckets(req: Request, res: Response, next: NextFunction) {
-  return storage.getBuckets()
-  .then((buckets: GetBucketsResponse) => {
-    buckets[0].forEach((bucket: Bucket, index: number) => {
-      console.log(`[Bucket ${index}]`, bucket.name);
-    });
-    console.log("done");
-    return next();
-  }).catch((err: Error) => {
-    console.error(err.name);
-    console.error(err.message);
-  });
-}
-
 export const multer = Multer({
   storage: Multer.memoryStorage(),
   limits: {
