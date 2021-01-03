@@ -41,8 +41,8 @@ Images should each get a scaled-down thumbnail stored in the bucket.
 
 ===Next Steps For Dev Work (in order of importance)===
 DONE 	Image POST
-			Image POST cleanup
-			Tighten the Image class constructor
+DONE	Image POST cleanup
+DONE	Tighten the Image class constructor
 			Router cleanup
 			Tag POST
 			Image GET by id

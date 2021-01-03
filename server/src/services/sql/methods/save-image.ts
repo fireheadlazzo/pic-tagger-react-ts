@@ -10,6 +10,7 @@ import cloudsql from "../database-adaptor";
 // type ISaveObject = Image | Tag;
 export function saveImage(value: any) {
     const rawStatement: string = `INSERT INTO ${tableMap.IMAGES} (columns) VALUES (valueNums) RETURNING ${Image.primaryKey}`;
+    value = new Image(value).toDB();
     const values: any[] = [];
     const valueNums = Image.columns
         .map((key: string, index: number) => {
@@ -21,11 +22,7 @@ export function saveImage(value: any) {
         .replace("columns", Image.columns.join(","))
         .replace("valueNums", valueNums.join(","));
 
-    Image.columns.forEach((e:string, index: number) => {
-        console.log(e, values[index]);
-        console.log(valueNums[index]);
-    });
-    console.log(statement);
+    console.log("Running", statement);
     return cloudsql.connect()
     .then((client: PoolClient) => {
         return new Promise<any>((resolve, reject) => {
