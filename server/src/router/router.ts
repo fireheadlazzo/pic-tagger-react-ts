@@ -1,12 +1,15 @@
 import express from "express";
 import * as storage from "../services/cloudstorage";
 import { createImage, getImage } from "../controllers/images";
+import { createTag } from "../controllers/tags";
 import * as constants from "../models/constants";
 
 class Router {
   constructor() {
     // Create an express router
     this.app = express.Router();
+    this.app.use(express.json()) // for parsing application/json
+    this.app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
     // Assign the following routes
     console.log("Defining routes");
@@ -21,6 +24,10 @@ class Router {
       storage.sendImageToGCS,
       createImage
     );
+    /**
+     * Tags
+     */
+    this.app.post(`/${constants.tagsRoute}/?`, createTag);
   }
 
   public app: express.Router;

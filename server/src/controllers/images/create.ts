@@ -16,7 +16,7 @@ export function createImage(req: Request & UploadRequest, res: Response) {
   }
   
   const item = new Image(file);
-  item.tags = [1,2,3];
+  item.tags = [];
   item.details = {
     metadata: {
         height: 0,
