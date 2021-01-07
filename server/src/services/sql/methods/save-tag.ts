@@ -43,7 +43,7 @@ export function saveTag(value: any) {
             return value;
         })
         .catch((err: Error) => {
-            console.error(`ERROR in save-tag: `, err.message);
+            console.error(`ERROR in save-tag:`, err.message);
             throw err;
         });
 }

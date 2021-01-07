@@ -1,4 +1,5 @@
 import {Request, Response} from "express";
+import { statusCodes } from "../../models/constants";
 import { Tag } from "../../models/objs/tag";
 import { saveTag } from "../../services/sql";
 
@@ -7,13 +8,8 @@ export function createTag(req: Request, res: Response) {
   
   const item = new Tag(req.body);
 
-  console.log("req", req.params);
-  console.log("req", req.path);
-  console.log("req", req.query);
-  console.log("req", req.body);
-
   return saveTag(item)
   .then(value => {
-    return res.send(value);
+    return res.status(statusCodes.CREATED).send(value);
   });
 }
