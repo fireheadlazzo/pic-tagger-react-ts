@@ -3,7 +3,6 @@ export class Tag {
         if(!value) {
             return;
         }
-        // TODO: check that all needed keys exist
 
         this.id = Number(value.id)
         this.name = value.name;
@@ -28,6 +27,7 @@ export class Tag {
 
     public static primaryKey: string = "id";
     public static columns: string[] = ["name","type","images","created_at","updated_at","deleted_at","created_by","updated_by"];
+    public static requiredKeysPost: string[] = ["name"];
 
     // Used to convert class values to database-digestible format
     public toDB() {
