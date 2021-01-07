@@ -12,6 +12,10 @@ These are the bits that connect models to services
 
 The bits that communicate with outside services. SQL calls and database connections, Image uploads, pubsub messages, things like that
 
+# Middlewares
+
+Holds various middlewares used by the router
+
 # Router
 
 Just the router. Keep it separate from the main app file because it might get huge. Might end up making more than one if theres a need for that

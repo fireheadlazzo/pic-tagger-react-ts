@@ -39,6 +39,7 @@ export class Image {
 
     public static primaryKey: string = "id";
     public static columns: string[] = ["url", "tags", "details", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
+    public static requiredKeysPost: string[] = ["file"];
 
     // Used to convert class values to database-digestible format
     public toDB() {
