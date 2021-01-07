@@ -47,6 +47,9 @@ export enum tagTypes {
 
 export const validTagTypes = [ tagTypes.GENERAL, tagTypes.SOURCE, tagTypes.GROUP, tagTypes.ARTIST, tagTypes.CHARACTER, tagTypes.META ];
 
-export enum errorCodes {
-    NOT_FOUND = 404
+export enum statusCodes {
+    OK = 200,
+    CREATED = 201,
+    NOT_FOUND = 404,
+    UNPROCESSABLE_ENTITY = 422
 }

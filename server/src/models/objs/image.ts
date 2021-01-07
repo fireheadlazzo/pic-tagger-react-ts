@@ -28,7 +28,7 @@ export class Image {
     }
 
     public id?: number;
-    public url?: string;
+    public url?: string; // TODO: Is this needed?
     public tags?: number[];
     public details?: IDetails;
     public created_at?: Date;

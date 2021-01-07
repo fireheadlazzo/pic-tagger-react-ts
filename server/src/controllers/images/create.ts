@@ -1,4 +1,5 @@
 import {Request, Response} from "express";
+import { statusCodes } from "../../models/constants";
 import { UploadRequest } from "../../models/interfaces/upload-request";
 import { Image } from "../../models/objs/image";
 import { saveImage } from "../../services/sql";
@@ -31,6 +32,6 @@ export function createImage(req: Request & UploadRequest, res: Response) {
 
   return saveImage(item)
   .then(value => {
-    return res.send(value);
+    return res.status(statusCodes.CREATED).send(value);
   });
 }
