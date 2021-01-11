@@ -39,7 +39,7 @@ export function getImageById(value: number) {
         return new Image(result);
     })
     .catch((err: Error) => {
-        console.error(`ERROR in get-image-by-id: `, err.message);
+        console.error(`ERROR in get-image-by-id:`, err.message);
         throw err;
     });
 }

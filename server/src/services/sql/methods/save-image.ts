@@ -42,7 +42,7 @@ export function saveImage(value: any) {
         return value;
     })
     .catch((err: Error) => {
-        console.error(`ERROR in save-image: `, err.message);
+        console.error(`ERROR in save-image:`, err.message);
         throw err;
     });
 }

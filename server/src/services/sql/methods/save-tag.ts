@@ -23,7 +23,6 @@ export function saveTag(value: any) {
 
     console.log("Running", statement);
     console.log("Values", values);
-    // return Promise.resolve("done");
     return cloudsql.connect()
         .then((client: PoolClient) => {
             return new Promise<any>((resolve, reject) => {
