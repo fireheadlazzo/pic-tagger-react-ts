@@ -46,8 +46,11 @@ DONE	Tighten the Image class constructor
 DONE	Router cleanup
 DONE	Image GET by id
 			Tag POST
+			Make error formatting pretty
+			Fix module-alias
+			Fix prettier/linter/workspace formatting
 			Image GET list with all the trappings (pagination, order, etc)
-			Maybe a flag for thumbnail vs full-size would be fun. Could render full collections on one page with that
+			Maybe a GET Images flag for thumbnail vs full-size would be fun. Could render full collections on one page with that
 			Image PUT general use
 			This should also affect the tags table IF the tags are altered. Each tag should get the image ID
 			Image PUT tags only
