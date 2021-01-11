@@ -35,7 +35,7 @@ export const checkKeys = {
         console.error("imagePOST failed required keys");
         const error = new StatusError(`missing keys [${missing.join()}]`);
         error.status = statusCodes.UNPROCESSABLE_ENTITY;
-        throw error;
+        return next(error);
       }
       next();
     },
@@ -46,10 +46,10 @@ export const checkKeys = {
       const missing = getMissingKeys(req, Tag.requiredKeysPost);
   
       if (missing.length !== 0) {
-        console.error("tagPOSTfailed required keys");
+        console.error("tagPOST failed required keys");
         const error = new StatusError(`missing keys [${missing.join()}]`);
         error.status = statusCodes.UNPROCESSABLE_ENTITY;
-        throw error;
+        return next(error);
       }
       next();
     },
@@ -57,7 +57,7 @@ export const checkKeys = {
       res.set("Content-Type", "application/json");
       const err = new StatusError("Oops");
       err.status = 404;
-      throw err;
+      return next(err);
     },
   },
 }

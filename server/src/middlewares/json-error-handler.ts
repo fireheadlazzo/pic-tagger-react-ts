@@ -9,6 +9,6 @@ export function jsonErrorHandler (err: Error & StatusError, req: Request, res: R
     message: err.message
   }
   console.error(`[${response.status}]: ${response.message}`);
-  res.status(response.status).json(response);
+  res.status(response.status).json({error: response});
   return;
 }
