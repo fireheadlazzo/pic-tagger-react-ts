@@ -10,11 +10,6 @@ class Router {
   constructor() {
     this.app = express.Router();
     this.app.use(express.json());
-    this.app.use((req, res, next) => {
-      res.set("Content-Type", "application/json");
-      next();
-    });
-    this.app.use(middleware.jsonErrorHandler);
 
     this.app.use(morgan("dev"));
 
@@ -40,7 +35,13 @@ class Router {
     );
     this.app.get(`/${constants.tagsRoute}/?`,
       middleware.checkKeys.tags.GET
-    )
+    );
+
+    this.app.use(middleware.jsonErrorHandler);
+    this.app.use((req, res, next) => {
+      res.set("Content-Type", "application/json");
+      next();
+    });
   }
 
   public app: express.Router;
