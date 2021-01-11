@@ -1,16 +1,22 @@
 import express from "express";
 import * as storage from "../services/cloudstorage";
+import morgan from "morgan";
 import { createImage, getImage } from "../controllers/images";
 import { createTag } from "../controllers/tags";
-import checkRequiredKeys from "../midlewares/check-required-keys";
+import * as middleware from "../middlewares";
 import * as constants from "../models/constants";
 
 class Router {
   constructor() {
-    // Create an express router
     this.app = express.Router();
-    this.app.use(express.json()) // for parsing application/json
-    this.app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+    this.app.use(express.json());
+    this.app.use((req, res, next) => {
+      res.set("Content-Type", "application/json");
+      next();
+    });
+    this.app.use(middleware.jsonErrorHandler);
+
+    this.app.use(morgan("dev"));
 
     // Assign the following routes
     console.log("Defining routes");
@@ -21,7 +27,7 @@ class Router {
 
     this.app.post(`/${constants.imagesRoute}/?`,
       storage.multer.single("file"),
-      checkRequiredKeys.imagePOST,
+      middleware.checkKeys.images.POST,
       storage.sendImageToGCS,
       createImage
     );
@@ -29,9 +35,12 @@ class Router {
      * Tags
      */
     this.app.post(`/${constants.tagsRoute}/?`,
-      checkRequiredKeys.tagPOST,
+      middleware.checkKeys.tags.POST,
       createTag
     );
+    this.app.get(`/${constants.tagsRoute}/?`,
+      middleware.checkKeys.tags.GET
+    )
   }
 
   public app: express.Router;
