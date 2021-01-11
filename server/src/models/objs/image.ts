@@ -45,7 +45,7 @@ export class Image {
     public toDB() {
         return {
             url: this.url,
-            tags: JSON.stringify(this.tags),
+            tags: this.tags ? JSON.stringify(this.tags) : JSON.stringify([]),
             details: JSON.stringify(this.details),
             created_at: new Date(),
             updated_at: new Date(),

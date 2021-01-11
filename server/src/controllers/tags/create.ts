@@ -7,6 +7,7 @@ export function createTag(req: Request, res: Response) {
   console.log(`Creating new tag`)
   
   const item = new Tag(req.body);
+  item.images = req.body.images ? JSON.parse(req.body.images) : [];
 
   return saveTag(item)
   .then(value => {

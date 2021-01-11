@@ -17,6 +17,7 @@ export function createImage(req: Request & UploadRequest, res: Response) {
   }
   
   const item = new Image(file);
+  // images start with no tags
   item.tags = [];
   item.details = {
     metadata: {
