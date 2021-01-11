@@ -33,5 +33,9 @@ export function createImage(req: Request & UploadRequest, res: Response) {
   return saveImage(item)
   .then(value => {
     return res.status(statusCodes.CREATED).send(value);
+  })
+  .catch((err: Error) => {
+    console.error(`createImage ERROR: ${err}`);
+    throw err;
   });
 }

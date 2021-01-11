@@ -11,5 +11,9 @@ export function createTag(req: Request, res: Response) {
   return saveTag(item)
   .then(value => {
     return res.status(statusCodes.CREATED).send(value);
+  })
+  .catch((err: Error) => {
+    console.error(`createTag ERROR: ${err}`);
+    throw err;
   });
 }
