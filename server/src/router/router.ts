@@ -25,6 +25,7 @@ app.post(`/${constants.imagesRoute}/?`,
 app.get(`/${constants.tagsRoute}/?`,
   middleware.checkKeys.tags.GET
 );
+
 app.post(`/${constants.tagsRoute}/?`,
   middleware.checkKeys.tags.POST,
   createTag

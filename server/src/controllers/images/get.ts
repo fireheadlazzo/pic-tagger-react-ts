@@ -1,13 +1,13 @@
-import {Request, Response} from "express";
+import { Request, Response, NextFunction } from "express";
 import { getImageById } from "../../services/sql";
 import { Image } from "../../models/objs/image";
 import { StatusError } from "../../models/status-error";
 
-export function getImage(req: Request<{id: string}>, res: Response) {
+export function getImage(req: Request<{id: string}>, res: Response, next: NextFunction) {
   console.log(`Getting image [${req.params.id}]`);
   if (!req.params.id){
     const error = new Error("getImage - No id to GET");
-    throw(error);
+    return next(error);
   }
 
   return getImageById(Number(req.params.id))
@@ -19,6 +19,6 @@ export function getImage(req: Request<{id: string}>, res: Response) {
     if (err.status) {
       return res.status(err.status).send(err.message);
     }
-    throw err;
+    return next(err);
   });
 }

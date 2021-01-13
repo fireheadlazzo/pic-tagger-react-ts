@@ -1,10 +1,10 @@
-import {Request, Response} from "express";
+import { Request, Response, NextFunction } from "express";
 import { statusCodes } from "../../models/constants";
 import { UploadRequest } from "../../models/interfaces/upload-request";
 import { Image } from "../../models/objs/image";
 import { saveImage } from "../../services/sql";
 
-export function createImage(req: Request & UploadRequest, res: Response) {
+export function createImage(req: Request & UploadRequest, res: Response, next: NextFunction) {
   console.log(`Creating new image for file [${req.file.bucket}/${req.file.path}]`)
   const { file } = req;
   if (
@@ -13,7 +13,7 @@ export function createImage(req: Request & UploadRequest, res: Response) {
     !file.path
   ){
     const error = new Error("Cloud Storage keys not found on file");
-    throw(error);
+    return next(error);
   }
   
   const item = new Image(file);
@@ -37,6 +37,6 @@ export function createImage(req: Request & UploadRequest, res: Response) {
   })
   .catch((err: Error) => {
     console.error(`createImage ERROR: ${err}`);
-    throw err;
+    return next(err);
   });
 }

@@ -1,9 +1,9 @@
-import {Request, Response} from "express";
+import { Request, Response, NextFunction } from "express";
 import { statusCodes } from "../../models/constants";
 import { Tag } from "../../models/objs/tag";
 import { saveTag } from "../../services/sql";
 
-export function createTag(req: Request, res: Response) {
+export function createTag(req: Request, res: Response, next: NextFunction) {
   console.log(`Creating new tag`)
   
   const item = new Tag(req.body);
@@ -15,6 +15,6 @@ export function createTag(req: Request, res: Response) {
   })
   .catch((err: Error) => {
     console.error(`createTag ERROR: ${err}`);
-    throw err;
+    return next(err);
   });
 }
