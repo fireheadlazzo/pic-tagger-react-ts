@@ -18,6 +18,18 @@
             // "src/index"
         //   ]
         // }
+        "types": ["node"],
+        "moduleResolution": "node",
+        "baseUrl": "./src",
+        "paths": {
+            "config": ["config"],
+            "controllers/*": ["controllers/*"],
+            "middlewares/*": ["middlewares/*"],
+            "models/*": ["models/*"],
+            "router/*": ["router/*"],
+            "services/*": ["services/*"],
+            "*": ["node_modules/*", "types/*"],
+        }
     },
     "include": [
         "src/**/*"

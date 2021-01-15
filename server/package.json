@@ -16,7 +16,9 @@
   "_moduleAliases": {
     "config": "build/config",
     "controllers": "build/controllers",
+    "middlewares": "build/middlewares",
     "models": "build/models",
+    "router": "build/router",
     "services": "build/services"
   },
   "dependencies": {

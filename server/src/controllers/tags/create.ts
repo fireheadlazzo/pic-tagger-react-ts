@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import StatusCode from "http-status";
-import { Tag } from "../../models/objs/tag";
-import { saveTag } from "../../services/sql";
+import { Tag } from "models/objs/tag";
+import { saveTag } from "services/sql";
 
 export function createTag(req: Request, res: Response, next: NextFunction) {
   console.log(`Creating new tag`)

@@ -1,7 +1,7 @@
 import { PoolClient, QueryResult } from "pg";
-import { tableMap } from "../../../models/constants";
-import { Tag } from "../../../models/objs/tag";
-import cloudsql from "../database-adaptor";
+import { tableMap } from "models/constants";
+import { Tag } from "models/objs/tag";
+import cloudsql from "services/sql/database-adaptor";
 
 /**
  * Tag save funtion

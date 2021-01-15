@@ -1,8 +1,8 @@
 import { PoolClient, QueryResult } from "pg";
-import { tableMap } from "../../../models/constants";
-import { Image } from "../../../models/objs/image";
-import cloudsql from "../database-adaptor";
-import { StatusError } from "../../../models/status-error";
+import { tableMap } from "models/constants";
+import { Image } from "models/objs/image";
+import cloudsql from "services/sql/database-adaptor";
+import { StatusError } from "models/status-error";
 import StatusCode from "http-status";
 
 /**

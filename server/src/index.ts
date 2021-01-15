@@ -1,4 +1,4 @@
-import "module-alias/register";
+require("module-alias/register");
 import express from "express";
 import config from "./config";
 import router from "./router/router";
