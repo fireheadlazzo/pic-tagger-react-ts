@@ -41,11 +41,21 @@ export enum tagTypes {
     CHARACTER = 3,
     // Signifies the overarching group associated with the image. This is common with studio-produced images without a single common creator
     GROUP = 4,
+    // names the person/s who did not create the piece, but paid for or encouraged its creation
+    COMMISSIONER = 5,
     // signifies characterisics of the image itself, such as general size, format, date, and style
-    META = 5
+    META = 6
 }
 
-export const validTagTypes = [ tagTypes.GENERAL, tagTypes.SOURCE, tagTypes.GROUP, tagTypes.ARTIST, tagTypes.CHARACTER, tagTypes.META ];
+export const validTagTypes = [
+    tagTypes.GENERAL,
+    tagTypes.SOURCE,
+    tagTypes.GROUP,
+    tagTypes.ARTIST,
+    tagTypes.CHARACTER,
+    tagTypes.COMMISSIONER,
+    tagTypes.META
+];
 
 export enum statusCodes {
     OK = 200,
