@@ -53,11 +53,5 @@ export const checkKeys = {
       }
       next();
     },
-    GET: (req: Request, res: Response, next: NextFunction) => {
-      res.set("Content-Type", "application/json");
-      const err = new StatusError("Oops");
-      err.status = 404;
-      return next(err);
-    },
   },
 }
