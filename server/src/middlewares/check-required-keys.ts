@@ -3,7 +3,7 @@ import { UploadRequest } from "../models/interfaces/upload-request";
 import { Image } from "../models/objs/image";
 import { Tag } from "../models/objs/tag";
 import { StatusError } from "../models/status-error";
-import { statusCodes } from "../models/constants";
+import StatusCode from "http-status";
 
 /**
  * getMissingKeys
@@ -34,7 +34,7 @@ export const checkKeys = {
       if (missing.length !== 0) {
         console.error("imagePOST failed required keys");
         const error = new StatusError(`missing keys [${missing.join()}]`);
-        error.status = statusCodes.UNPROCESSABLE_ENTITY;
+        error.status = StatusCode.UNPROCESSABLE_ENTITY;
         return next(error);
       }
       next();
@@ -48,7 +48,7 @@ export const checkKeys = {
       if (missing.length !== 0) {
         console.error("tagPOST failed required keys");
         const error = new StatusError(`missing keys [${missing.join()}]`);
-        error.status = statusCodes.UNPROCESSABLE_ENTITY;
+        error.status = StatusCode.UNPROCESSABLE_ENTITY;
         return next(error);
       }
       next();

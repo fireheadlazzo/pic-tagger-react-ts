@@ -1,8 +1,9 @@
 import { PoolClient, QueryResult } from "pg";
-import { tableMap, statusCodes } from "../../../models/constants";
+import { tableMap } from "../../../models/constants";
 import { Tag } from "../../../models/objs/tag";
 import cloudsql from "../database-adaptor";
 import { StatusError } from "../../../models/status-error";
+import StatusCode from "http-status";
 
 /**
  * Tag save funtion
@@ -32,7 +33,7 @@ export function getTagById(value: number) {
         const {rows} = results;
         if (rows.length <= 0) {
             const error = new StatusError(`tag with id [${value}] not found`);
-            error.status = statusCodes.NOT_FOUND;
+            error.status = StatusCode.NOT_FOUND;
             throw error;
         }
         const result = new Tag().fromDB(rows[0]);
