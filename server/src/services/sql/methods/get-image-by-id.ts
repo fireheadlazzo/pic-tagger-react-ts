@@ -1,8 +1,9 @@
 import { PoolClient, QueryResult } from "pg";
-import { tableMap, statusCodes } from "../../../models/constants";
+import { tableMap } from "../../../models/constants";
 import { Image } from "../../../models/objs/image";
 import cloudsql from "../database-adaptor";
 import { StatusError } from "../../../models/status-error";
+import StatusCode from "http-status";
 
 /**
  * Image save funtion
@@ -32,7 +33,7 @@ export function getImageById(value: number) {
         const {rows} = results;
         if (rows.length <= 0) {
             const error = new StatusError(`image with id [${value}] not found`);
-            error.status = statusCodes.NOT_FOUND;
+            error.status = StatusCode.NOT_FOUND;
             throw error;
         }
         const result = new Image().fromDB(rows[0]);
