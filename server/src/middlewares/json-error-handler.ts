@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import StatusCode from "http-status";
-import { StatusError } from "../models/status-error";
+import { StatusError } from "models/status-error";
 
 export function jsonErrorHandler (err: Error & StatusError, req: Request, res: Response, next: NextFunction) {
   // TODO: Handle axios errors special?

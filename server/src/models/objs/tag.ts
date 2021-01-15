@@ -1,4 +1,4 @@
-import { tagTypes } from "../constants";
+import { tagTypes } from "models/constants";
 
 export class Tag {
     constructor(value?: any){

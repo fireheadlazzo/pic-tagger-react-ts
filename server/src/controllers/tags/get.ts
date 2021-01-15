@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { getTagById } from "../../services/sql";
-import { Tag } from "../../models/objs/tag";
-import { StatusError } from "../../models/status-error";
+import { getTagById } from "services/sql";
+import { Tag } from "models/objs/tag";
+import { StatusError } from "models/status-error";
 
 export function getTag(req: Request<{id: string}>, res: Response, next: NextFunction) {
   console.log(`Getting tag [${req.params.id}]`);

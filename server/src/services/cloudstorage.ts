@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from "express";
 import {Bucket, Storage } from "@google-cloud/storage";
-import config from "../config";
-import {UploadRequest} from "../models/interfaces/upload-request";
+import config from "config";
+import {UploadRequest} from "models/interfaces/upload-request";
 import path from "path";
 import Multer from "multer";
 import {v4 as uuidv4} from "uuid";
