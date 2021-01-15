@@ -1,7 +1,7 @@
 import express from "express";
 import * as storage from "../services/cloudstorage";
 import { createImage, getImage } from "../controllers/images";
-import { createTag } from "../controllers/tags";
+import { createTag, getTag } from "../controllers/tags";
 import * as middleware from "../middlewares";
 import * as constants from "../models/constants";
 
@@ -22,8 +22,7 @@ app.post(`/${constants.imagesRoute}/?`,
 /**
  * Tags
  */
-app.get(`/${constants.tagsRoute}/?`,
-  middleware.checkKeys.tags.GET
+app.get(`/${constants.tagsRoute}/:id`, getTag
 );
 
 app.post(`/${constants.tagsRoute}/?`,
