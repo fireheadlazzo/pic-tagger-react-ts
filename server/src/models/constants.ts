@@ -56,3 +56,6 @@ export const validTagTypes = [
     tagTypes.COMMISSIONER,
     tagTypes.META
 ];
+
+// file extensions accepted by multer. This DOES NOT prevent files from being purposely misnamed
+export const validFileExtensions = [ "png", "jpg", "jpeg" ];

@@ -5,6 +5,9 @@ import {UploadRequest} from "models/interfaces/upload-request";
 import path from "path";
 import Multer from "multer";
 import {v4 as uuidv4} from "uuid";
+import { validFileExtensions } from "models/constants";
+import { StatusError } from "models/status-error";
+import StatusCode from "http-status";
 
 const storage = new Storage({
   keyFilename: path.join(__dirname, config.get("STORAGE_CREDENTIALS")),
@@ -51,6 +54,18 @@ export function sendImageToGCS(
 export const multer = Multer({
   storage: Multer.memoryStorage(),
   limits: {
-    fileSize: 40 * 1048576
+    // limit file size to 10MiB for now
+    fileSize: 10 * 1048576
+  },
+  fileFilter : function (req, file, callback) {
+    // stop files if they do not have a supported file extension
+    const ext = path.extname(file.originalname).slice(1);
+    console.log(`ext of [${file.originalname}] = [${ext}]`);
+    if (validFileExtensions.indexOf(ext) <= -1) {
+      const err = new StatusError("File type is not currently supported");
+      err.status = StatusCode.UNPROCESSABLE_ENTITY;
+      return callback(err);
+    }
+    callback(null, true);
   }
 });
