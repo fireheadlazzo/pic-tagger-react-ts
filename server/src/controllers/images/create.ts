@@ -19,15 +19,15 @@ export function createImage(req: Request & UploadRequest, res: Response, next: N
   const item = new Image(file);
   // images start with no tags
   item.tags = [];
+  item.filename = file.path;
+  item.bucket = file.bucket;
   item.details = {
     metadata: {
         height: 0,
         width: 0,
     },
     uploadInfo: {
-        originalName: file.originalname,
-        bucket: file.bucket,
-        fileName: file.path,
+        originalName: file.originalname
     }
   };
 
