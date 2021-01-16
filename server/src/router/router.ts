@@ -2,7 +2,7 @@ import express from "express";
 import * as storage from "services/cloudstorage";
 import { createImage, getImage } from "controllers/images";
 import { createTag, getTag } from "controllers/tags";
-import * as middleware from "middlewares/index";
+import * as middleware from "middlewares/index"; // TODO: Do I need this /index?
 import * as constants from "models/constants";
 
 const app = express.Router();

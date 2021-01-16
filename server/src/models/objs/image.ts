@@ -5,8 +5,6 @@ interface IDetails {
     },
     uploadInfo: {
         originalName: string;
-        bucket: string;
-        fileName: string;
     }
 };
 
@@ -17,7 +15,8 @@ export class Image {
         }
 
         this.id = Number(value.id)
-        this.url = value.url || value.path; // url = Image; path = fresh upload from GCS
+        this.filename = value.filename || value.path; // filename = existing Image; path = fresh upload from GCS
+        this.bucket = value.bucket;
         this.tags = value.tags;
         this.details = value.details;
         this.created_at = value.created_at;
@@ -28,7 +27,8 @@ export class Image {
     }
 
     public id?: number;
-    public url?: string; // TODO: Is this needed?
+    public filename?: string;
+    public bucket?: string;
     public tags?: number[];
     public details?: IDetails;
     public created_at?: Date;
@@ -38,13 +38,14 @@ export class Image {
     public updated_by?: string;
 
     public static primaryKey: string = "id";
-    public static columns: string[] = ["url", "tags", "details", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
+    public static columns: string[] = ["filename", "bucket", "tags", "details", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
     public static requiredKeysPost: string[] = ["file"];
 
     // Used to convert class values to database-digestible format
     public toDB() {
         return {
-            url: this.url,
+            filename: this.filename,
+            bucket: this.bucket,
             tags: this.tags ? JSON.stringify(this.tags) : JSON.stringify([]),
             details: JSON.stringify(this.details),
             created_at: new Date(),
@@ -59,7 +60,8 @@ export class Image {
     public fromDB(value: any) {
         return {
             id: value.id,
-            url: value.url,
+            filename: value.filename,
+            bucket: value.bucket,
             tags: value.tags,
             details: value.details,
             created_at: value.created_at,
