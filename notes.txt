@@ -58,3 +58,22 @@ DONE	Image GET by id
 			Image DELETE (soft and hard)
 			Tag DELETE (soft and hard)
 	
+UNIT TESTS TODO
+endpoint tests
+	POST /i/
+		- file posts
+		- no file throws UNPROCESSABLE_ENTITY
+		- large file is rejected
+		- initial tags are stripped off
+	GET /i/:id
+		- returns image if exists
+		- returns 404 if not found
+	POST /t/
+		- tag posts
+		- missing keys throws UNPROCESSABLE_ENTITY
+		- optional keys are do not throw error
+		- keys default to correct value
+		- images write to DB in proper format
+	GET /t/:id
+		- returns tag if exists
+		- returns 404 if not found
