@@ -1,36 +1,71 @@
-import {NextFunction, Request, Response} from "express";
-import {Bucket, Storage, GetBucketsResponse} from "@google-cloud/storage";
-import config from '../config';
-import {UploadRequest} from "../models/upload-request";
+import config from "config";
 import path from "path";
+import Multer from "multer";
+import StatusCode from "http-status";
+import { StatusError } from "models/status-error";
+import { NextFunction, Request, Response } from "express";
+import { Bucket, Storage } from "@google-cloud/storage";
+import { UploadRequest} from "models/interfaces/upload-request";
+import { validFileExtensions } from "models/constants";
+import { v4 as uuidv4 } from "uuid";
 
 const storage = new Storage({
-  keyFilename: path.join(__dirname, config.get("SERVICE_ACCOUNT_CREDENTIALS")),
+  keyFilename: path.join(__dirname, config.get("STORAGE_CREDENTIALS")),
   projectId: config.get("PROJECT_NAME")
 });
 
-export function sendImageToGCS(req: Request & UploadRequest, res: Response, next: NextFunction) {
-  console.log("got here");
+export function sendImageToGCS(
+  req: Request & UploadRequest,
+  res: Response,
+  next: NextFunction
+) {
   if (!req.file) {
-  //   console.log(req)
+    console.error("No file on upload request!")
     return next();
   }
-  console.log(Object.keys(req.file));
+
   const bucket: Bucket = storage.bucket(config.get("IMAGE_BUCKET"));
-  console.log(bucket.name);
-  return next();
+  const fileExt = path.extname(req.file.originalname);
+  const filePath = `${uuidv4()}${fileExt}`;
+
+  const file = bucket.file(filePath);
+
+  const stream = file.createWriteStream({
+    metadata: { contentType: req.file.mimetype }
+  });
+
+  const onSreamError = (err: Error) => {
+    console.error(err.message);
+    req.file.cloudStorageError = err,
+    next(err);
+  }
+  const onSreamFinish = () => {
+    console.log("Upload complete");
+    req.file.bucket = config.get("IMAGE_BUCKET");
+    req.file.path = filePath;
+    next();
+  }
+
+  stream.on("error", onSreamError);
+  stream.on("finish", onSreamFinish);
+  stream.end(req.file.buffer);
 }
 
-export function listBuckets(req: Request, res: Response, next: NextFunction) {
-  return storage.getBuckets()
-  .then((buckets: GetBucketsResponse) => {
-    buckets[0].forEach((bucket: Bucket, index: number) => {
-      console.log(`[Bucket ${index}]`, bucket.name);
-    });
-    console.log("done");
-    return next();
-  }).catch((err: Error) => {
-    console.error(err.name);
-    console.error(err.message);
-  });
-}
+export const multer = Multer({
+  storage: Multer.memoryStorage(),
+  limits: {
+    // limit file size to 10MiB for now
+    fileSize: 10 * 1048576
+  },
+  fileFilter : function (req, file, callback) {
+    // stop files if they do not have a supported file extension
+    const ext = path.extname(file.originalname).slice(1);
+    console.log(`ext of [${file.originalname}] = [${ext}]`);
+    if (validFileExtensions.indexOf(ext) <= -1) {
+      const err = new StatusError("File type is not currently supported");
+      err.status = StatusCode.UNPROCESSABLE_ENTITY;
+      return callback(err);
+    }
+    callback(null, true);
+  }
+});

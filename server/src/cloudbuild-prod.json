@@ -1,38 +1,47 @@
 {
-    "steps": [
-        {
-            "name": "node:13",
-            "entrypoint": "npm",
-            "args": ["install"],
-            "dir": "server"
-        },
-        {
-            "name": "gcr.io/cloud-builders/gcloud",
-            "entrypoint": "bash",
-            "args": [
-                "-c",
-                "gcloud secrets versions access latest --secret=CONFIG --format='get(payload.data)' | tr '_-' '/+' | base64 -d > config.json"
-            ],
-            "dir": "server/src"
-        },
-        {
-            "name": "node:13",
-            "entrypoint": "npm",
-            "args": ["run", "build"],
-            "dir": "server"
-        },
-        {
-            "name": "gcr.io/cloud-builders/docker",
-            "args": [
-                "build",
-                "-t", "gcr.io/$PROJECT_ID/server:latest",
-                "--cache-from", "gcr.io/$PROJECT_ID/server:latest",
-                "."
-            ],
-            "dir": "server"
-        }
-    ],
-    "timeout": "1000s",
-    "options": {},
-    "images": ["gcr.io/$PROJECT_ID/server:latest"]
+  "steps": [
+    {
+      "name": "node:13",
+      "entrypoint": "npm",
+      "args": [
+        "install"
+      ],
+      "dir": "server"
+    },
+    {
+      "name": "gcr.io/cloud-builders/gcloud",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "gcloud secrets versions access latest --secret=CONFIG --format='get(payload.data)' | tr '_-' '/+' | base64 -d > config.json"
+      ],
+      "dir": "server/src"
+    },
+    {
+      "name": "node:13",
+      "entrypoint": "npm",
+      "args": [
+        "run",
+        "build"
+      ],
+      "dir": "server"
+    },
+    {
+      "name": "gcr.io/cloud-builders/docker",
+      "args": [
+        "build",
+        "-t",
+        "gcr.io/$PROJECT_ID/server:latest",
+        "--cache-from",
+        "gcr.io/$PROJECT_ID/server:latest",
+        "."
+      ],
+      "dir": "server"
+    }
+  ],
+  "timeout": "1000s",
+  "options": {},
+  "images": [
+    "gcr.io/$PROJECT_ID/server:latest"
+  ]
 }
