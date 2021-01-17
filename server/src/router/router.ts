@@ -1,8 +1,7 @@
 import express from "express";
 import * as storage from "services/cloudstorage";
 import { createImage, getImage, listImages } from "controllers/images";
-import { createTag, getTag } from "controllers/tags";
-import * as middleware from "middlewares/index"; // TODO: Do I need this /index?
+import { createTag, getTag, listTags } from "controllers/tags";
 import * as constants from "models/constants";
 
 const app = express.Router();
@@ -25,6 +24,9 @@ app.post(`/${constants.imagesRoute}/?`,
  * Tags
  */
 app.get(`/${constants.tagsRoute}/:id`, getTag
+);
+
+app.get(`/${constants.tagsRoute}/?`, listTags
 );
 
 app.post(`/${constants.tagsRoute}/?`,
