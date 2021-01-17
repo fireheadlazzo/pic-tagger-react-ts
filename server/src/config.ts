@@ -17,6 +17,9 @@ nconf.defaults({
     SQL_HOST: "",
     SQL_PASSWORD: "",
     SQL_PORT: "1234",
+    // hard-coded constants
+    LIST_IMAGES_MAX_PAGE_SIZE: 32,
+    LIST_TAGS_MAX_PAGE_SIZE: 32,
 });
 
 export default nconf;

@@ -1,6 +1,6 @@
 import express from "express";
 import * as storage from "services/cloudstorage";
-import { createImage, getImage } from "controllers/images";
+import { createImage, getImage, listImages } from "controllers/images";
 import { createTag, getTag } from "controllers/tags";
 import * as middleware from "middlewares/index"; // TODO: Do I need this /index?
 import * as constants from "models/constants";
@@ -12,6 +12,8 @@ console.log("Defining routes");
  * Images
  */
 app.get(`/${constants.imagesRoute}/:id`, getImage);
+
+app.get(`/${constants.imagesRoute}/?`, listImages);
 
 app.post(`/${constants.imagesRoute}/?`,
   storage.multer.single("file"),
