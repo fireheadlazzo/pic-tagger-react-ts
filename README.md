@@ -60,6 +60,8 @@ gcloud iam service-accounts add-iam-policy-binding \
     --role=roles/iam.serviceAccountUser
 ```
 
+- If you intend to run the code locally, create a service-account token with Storage Admin permissions and save it the your development machine
+
 - Trigger a build. It should build successfully and create a new container in the container registry
 - From the Container Registry, find the `latest` image and select Deploy to Cloud Run
   - service name `pic-tagger-v2-node`

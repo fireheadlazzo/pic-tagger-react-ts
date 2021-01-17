@@ -1,7 +1,8 @@
-CREATE TABLE IF NOT EXISTS public.photo
+CREATE TABLE IF NOT EXISTS public.images
 (
     id BIGSERIAL PRIMARY KEY NOT NULL,
-    url VARCHAR(128) NOT NULL,
+    bucket VARCHAR(128) NOT NULL,
+    filename VARCHAR(128) NOT NULL,
     tags JSONB DEFAULT '[]' NOT NULL,
     details JSONB DEFAULT '{}' NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
@@ -11,6 +12,6 @@ CREATE TABLE IF NOT EXISTS public.photo
     updated_by VARCHAR(128) NOT NULL
 );
 
-CREATE INDEX photo_tags_gin_idx
-    ON public.photo
+CREATE INDEX images_tags_gin_idx
+    ON public.images
         USING GIN (tags);

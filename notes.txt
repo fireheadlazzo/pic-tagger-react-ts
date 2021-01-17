@@ -17,5 +17,63 @@ A: Because it does, and for a good reason.
    Then it runs Docker build
      This triggers the Dockerfile script, which copies the relevant files from the build
      then npm install must be run again on the new build/ directory
+Q: Multer?
+A: It handles multi-part form data. It is not specifically an image handler, but it does load the file into memory and places limits on file sizes
+   In the example code, it gets passed "file" to indicate that it should pull req.body.file off, run it through multer, and put the file directly on req
 
 SASS
+
+TODO TOMORROW:
+Image uploading is functional, but the process of piecing together the Image body could be tighter.
+Make sure that it has all of the needed fields before even getting to the GCS middleware and make sure no extra parameters make it into the Image object.
+Consider maybe picking out approved keys for details
+
+Data models could be more extensive. This could be made part of the planning phase even if the models dont get utilized for a long time.
+Start with Image and Tag, but also think about Artist, Alias, Implication, and Collection
+Sorting the models into folders might be useful?
+
+The router should be moved into its own module. Since the server is largely monolithic, it will get extensive
+
+Images should each get a scaled-down thumbnail stored in the bucket.
+	This should be generated every time an image is added to the bucket
+	The trigger COULD be keyed off of the bucket changing, but that would set off another trigger every time a thumbnail is uploaded
+	It might be better to store the thumbnail URL on the image details and periodically check for images with no thumbnails. This might create a large delay between upload and thumbnail creation
+
+===Next Steps For Dev Work (in order of importance)===
+DONE 	Image POST
+DONE	Image POST cleanup
+DONE	Tighten the Image class constructor
+DONE	Router cleanup
+DONE	Image GET by id
+			Tag POST
+			Make error formatting pretty
+			Fix module-alias
+			Fix prettier/linter/workspace formatting
+			Image GET list with all the trappings (pagination, order, etc)
+			Maybe a GET Images flag for thumbnail vs full-size would be fun. Could render full collections on one page with that
+			Image PUT general use
+			This should also affect the tags table IF the tags are altered. Each tag should get the image ID
+			Image PUT tags only
+			This should also affect the tags table. Each tag should get the image ID
+			Image DELETE (soft and hard)
+			Tag DELETE (soft and hard)
+	
+UNIT TESTS TODO
+endpoint tests
+	POST /i/
+		- file posts
+		- no file throws UNPROCESSABLE_ENTITY
+		- large file is rejected
+		- initial tags are stripped off
+	GET /i/:id
+		- returns image if exists
+		- returns 404 if not found
+	POST /t/
+		- tag posts
+		- missing keys throws UNPROCESSABLE_ENTITY
+		- optional keys are do not throw error
+		- keys default to correct value
+		- images write to DB in proper format
+	GET /t/:id
+		- returns tag if exists
+		- returns 404 if not found
