@@ -1,5 +1,5 @@
-import {Pool} from "pg";
 import config from "config";
+import { Pool } from "pg";
 
 export default new Pool({
   user: config.get("SQL_USER"),

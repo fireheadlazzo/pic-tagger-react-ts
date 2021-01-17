@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
 import StatusCode from "http-status";
+import { Request, Response, NextFunction } from "express";
 import { StatusError } from "models/status-error";
 
 export function jsonErrorHandler (err: Error & StatusError, req: Request, res: Response, next: NextFunction) {
