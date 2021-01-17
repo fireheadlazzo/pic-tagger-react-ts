@@ -1,13 +1,13 @@
-import {NextFunction, Request, Response} from "express";
-import {Bucket, Storage } from "@google-cloud/storage";
 import config from "config";
-import {UploadRequest} from "models/interfaces/upload-request";
 import path from "path";
 import Multer from "multer";
-import {v4 as uuidv4} from "uuid";
-import { validFileExtensions } from "models/constants";
-import { StatusError } from "models/status-error";
 import StatusCode from "http-status";
+import { StatusError } from "models/status-error";
+import { NextFunction, Request, Response } from "express";
+import { Bucket, Storage } from "@google-cloud/storage";
+import { UploadRequest} from "models/interfaces/upload-request";
+import { validFileExtensions } from "models/constants";
+import { v4 as uuidv4 } from "uuid";
 
 const storage = new Storage({
   keyFilename: path.join(__dirname, config.get("STORAGE_CREDENTIALS")),

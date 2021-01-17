@@ -14,5 +14,6 @@ server/build
 .DS_Store
 .vscode
 .idea
+scratch.json
 
 npm-debug.log*

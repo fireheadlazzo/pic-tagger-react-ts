@@ -1,9 +1,9 @@
+import cloudsql from "services/sql/database-adaptor";
+import StatusCode from "http-status";
+import { StatusError } from "models/status-error";
 import { PoolClient, QueryResult } from "pg";
 import { tableMap } from "models/constants";
 import { Tag } from "models/objs/tag";
-import cloudsql from "services/sql/database-adaptor";
-import { StatusError } from "models/status-error";
-import StatusCode from "http-status";
 
 /**
  * Tag save funtion

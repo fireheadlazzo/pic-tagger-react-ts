@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import * as sql from "services/sql";
 import { Image } from "models/objs/image";
 import { StatusError } from "models/status-error";
 import { QueryOptions } from "models/objs/query-options";
+import * as sql from "services/sql";
 
 export function listImages(req: Request, res: Response, next: NextFunction) {
   const options = new QueryOptions(req.query);

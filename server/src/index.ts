@@ -1,7 +1,7 @@
 require("module-alias/register");
 import express from "express";
-import config from "./config";
-import router from "./router/router";
+import config from "config";
+import router from "router/router";
 import morgan from "morgan";
 import bp from "body-parser";
 
