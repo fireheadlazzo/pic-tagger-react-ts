@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import StatusCode from "http-status";
 import { Tag } from "models/objs/tag";
-import { saveTag } from "services/sql";
+import * as sql from "services/sql";
 
 export function createTag(req: Request, res: Response, next: NextFunction) {
   console.log(`Creating new tag`)
@@ -9,7 +9,7 @@ export function createTag(req: Request, res: Response, next: NextFunction) {
   const item = new Tag(req.body);
   item.images = req.body.images ? JSON.parse(req.body.images) : [];
 
-  return saveTag(item)
+  return sql.saveTag(item)
   .then(value => {
     return res.status(StatusCode.CREATED).send(value);
   })

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { getImageById } from "services/sql";
+import * as sql from "services/sql";
 import { Image } from "models/objs/image";
 import { StatusError } from "models/status-error";
 
@@ -10,7 +10,7 @@ export function getImage(req: Request<{id: string}>, res: Response, next: NextFu
     return next(error);
   }
 
-  return getImageById(Number(req.params.id))
+  return sql.getImageById(Number(req.params.id))
   .then((value: Image) => {
     console.log(`Got image [${value.id}]`);
     return res.send(value);

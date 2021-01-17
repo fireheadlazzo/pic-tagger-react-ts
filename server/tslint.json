@@ -2,6 +2,9 @@
   "rules": {
     "indent": [true,"spaces",2],
     "array-type": [true, "array"],
-    "no-consecutive-blank-lines": true
+    "no-consecutive-blank-lines": true,
+    "quotemark": [true, "double", "avoid-escape"],
+    "space-within-parens": false,
+    "curly": [true, "ignore-same-line"]
   }
 }

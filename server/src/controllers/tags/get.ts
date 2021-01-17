@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { getTagById } from "services/sql";
+import * as sql from "services/sql";
 import { Tag } from "models/objs/tag";
 import { StatusError } from "models/status-error";
 
@@ -10,7 +10,7 @@ export function getTag(req: Request<{id: string}>, res: Response, next: NextFunc
     return next(error);
   }
 
-  return getTagById(Number(req.params.id))
+  return sql.getTagById(Number(req.params.id))
   .then((value: Tag) => {
     console.log(`Got tag [${value.id}]`);
     return res.send(value);
