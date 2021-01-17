@@ -18,6 +18,15 @@
       "dir": "server/src"
     },
     {
+      "name": "gcr.io/cloud-builders/gcloud",
+      "entrypoint": "bash",
+      "args": [
+        "-c",
+        "gcloud secrets versions access latest --secret=CLOUD_STORAGE_CREDENTIALS --format='get(payload.data)' | tr '_-' '/+' | base64 -d > cs-credentials.json"
+      ],
+      "dir": "server/src"
+    },
+    {
       "name": "node:13",
       "entrypoint": "npm",
       "args": [
