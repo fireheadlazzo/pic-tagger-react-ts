@@ -14,6 +14,7 @@ nconf.defaults({
   STORAGE_CREDENTIALS: "../cs-credentials.json",
   IMAGE_BUCKET: "",
   PORT: 8000,
+  SQL_CONNECTION_LIMIT: 2,
   SQL_USER: "postgres",
   SQL_DATABASE: "postgres",
   SQL_HOST: "",
@@ -28,6 +29,7 @@ console.log(`checking config variables:`);
 const checkConfigs = [
 "PROJECT_NAME",
 "IMAGE_BUCKET",
+"SQL_CONNECTION_LIMIT",
 "SQL_USER",
 "SQL_DATABASE",
 "SQL_HOST",
