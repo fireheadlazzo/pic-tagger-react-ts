@@ -1,5 +1,5 @@
-import cloudsql from "services/sql/database-adaptor";
-import { PoolClient, QueryResult } from "pg";
+import { databaseAdaptor } from "services/sql/database-adaptor";
+import { QueryResult } from "pg";
 import { tableMap } from "models/constants";
 import { Image } from "models/objs/image";
 
@@ -23,19 +23,7 @@ export function saveImage(value: any) {
     .replace("valueNums", valueNums.join(","));
 
   console.log("Running", statement);
-  return cloudsql.connect()
-    .then((client: PoolClient) => {
-      return new Promise<any>((resolve, reject) => {
-        client.query(statement, values, (err: Error, results: QueryResult) => {
-          client.release();
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
-        })
-      })
-    })
+  return databaseAdaptor.getRunner(statement, values)
     .then((results: QueryResult) => {
       const { rows } = results;
       value[Image.primaryKey] = rows[0][Image.primaryKey];

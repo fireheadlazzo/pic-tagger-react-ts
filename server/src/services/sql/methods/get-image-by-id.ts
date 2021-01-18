@@ -1,7 +1,7 @@
-import cloudsql from "services/sql/database-adaptor";
 import StatusCode from "http-status";
+import { databaseAdaptor } from "services/sql/database-adaptor";
 import { StatusError } from "models/status-error";
-import { PoolClient, QueryResult } from "pg";
+import { QueryResult } from "pg";
 import { tableMap } from "models/constants";
 import { Image } from "models/objs/image";
 
@@ -16,21 +16,7 @@ export function getImageById(value: number) {
     .replace("image_id", `${value}`);
 
   console.log("Running", statement);
-  return cloudsql.connect()
-    .then((client: PoolClient) => {
-      console.log(`got client [${client.eventNames}]`);
-      return new Promise<any>((resolve, reject) => {
-        client.query(statement, (err: Error, results: QueryResult) => {
-          console.log(`Done with query [${err}] [${results}]`);
-          client.release();
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
-        })
-      })
-    })
+  return databaseAdaptor.getRunner(statement, [])
     .then((results: QueryResult) => {
       console.log(`got results [${results}]`);
       const { rows } = results;

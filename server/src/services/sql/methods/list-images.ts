@@ -1,7 +1,7 @@
-import cloudsql from "services/sql/database-adaptor";
 import StatusCode from "http-status";
+import { databaseAdaptor } from "services/sql/database-adaptor";
 import { StatusError } from "models/status-error";
-import { PoolClient, QueryResult } from "pg";
+import { QueryResult } from "pg";
 import { tableMap } from "models/constants";
 import { Image } from "models/objs/image";
 import { QueryOptions } from "models/objs/query-options";
@@ -14,20 +14,8 @@ export function listImages(options: QueryOptions) {
   const rawStatement: string = `SELECT * FROM ${tableMap.IMAGES} WHERE deleted_at IS NULL ORDER BY ${options.orderBy} ${options.ascending ? "ASC" : "DESC"} OFFSET ${options.offset} LIMIT ${options.limit};`;
 
   console.log("Running", rawStatement);
-  return cloudsql.connect()
-    .then((client: PoolClient) => {
-      return new Promise<any>((resolve, reject) => {
-        client.query(rawStatement, (err: Error, results: QueryResult) => {
-          client.release();
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
-        })
-      })
-    })
-    .then((results) => {
+  return databaseAdaptor.getRunner(rawStatement, [])
+    .then((results: QueryResult) => {
       const { rows } = results;
       if (rows.length <= 0) {
         const error = new StatusError(`image not found`);
