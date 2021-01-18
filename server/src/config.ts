@@ -1,5 +1,7 @@
 import path from "path";
 import nconf from "nconf";
+import StatusCode from "http-status";
+import { StatusError } from "models/status-error";
 
 nconf.overrides({});
 
@@ -23,12 +25,26 @@ nconf.defaults({
 });
 
 console.log(`checking config variables:`);
-console.log(`PROJECT_NAME: ${nconf.get("PROJECT_NAME")}`);
-console.log(`IMAGE_BUCKET: ${nconf.get("IMAGE_BUCKET")}`);
-console.log(`SQL_USER: ${nconf.get("SQL_USER")}`);
-console.log(`SQL_DATABASE: ${nconf.get("SQL_DATABASE")}`);
-console.log(`SQL_HOST: ${nconf.get("SQL_HOST")}`);
-console.log(`SQL_PASSWORD: ${nconf.get("SQL_PASSWORD")}`);
-console.log(`SQL_PORT: ${nconf.get("SQL_PORT")}`);
+const checkConfigs = [
+"PROJECT_NAME",
+"IMAGE_BUCKET",
+"SQL_USER",
+"SQL_DATABASE",
+"SQL_HOST",
+"SQL_PASSWORD",
+"SQL_PORT",
+];
+const missingConfigs = checkConfigs.filter((config: string) => {
+  if (!nconf.get(config)) {
+    return true;
+  }
+  return false;
+});
+if (missingConfigs.length > 0) {
+  const errorFields = missingConfigs.join(",");
+  const err = new StatusError(`Error initializing configs. Missing fields [${errorFields}]`);
+  err.status = StatusCode.INTERNAL_SERVER_ERROR;
+  throw err;
+}
 
 export default nconf;
