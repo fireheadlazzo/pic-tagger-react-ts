@@ -18,8 +18,10 @@ export function getImageById(value: number) {
   console.log("Running", statement);
   return cloudsql.connect()
     .then((client: PoolClient) => {
+      console.log(`got client [${client.eventNames}]`);
       return new Promise<any>((resolve, reject) => {
         client.query(statement, (err: Error, results: QueryResult) => {
+          console.log(`Done with query [${err}] [${results}]`);
           client.release();
           if (err) {
             reject(err);
@@ -30,6 +32,7 @@ export function getImageById(value: number) {
       })
     })
     .then((results: QueryResult) => {
+      console.log(`got results [${results}]`);
       const { rows } = results;
       if (rows.length <= 0) {
         const error = new StatusError(`image with id [${value}] not found`);
