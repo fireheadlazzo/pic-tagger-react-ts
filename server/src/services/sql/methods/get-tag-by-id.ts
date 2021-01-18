@@ -1,7 +1,7 @@
-import cloudsql from "services/sql/database-adaptor";
 import StatusCode from "http-status";
+import { databaseAdaptor } from "services/sql/database-adaptor";
 import { StatusError } from "models/status-error";
-import { PoolClient, QueryResult } from "pg";
+import { QueryResult } from "pg";
 import { tableMap } from "models/constants";
 import { Tag } from "models/objs/tag";
 
@@ -16,19 +16,7 @@ export function getTagById(value: number) {
     .replace("tag_id", `${value}`);
 
   console.log("Running", statement);
-  return cloudsql.connect()
-    .then((client: PoolClient) => {
-      return new Promise<any>((resolve, reject) => {
-        client.query(statement, (err: Error, results: QueryResult) => {
-          client.release();
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
-        })
-      })
-    })
+  return databaseAdaptor.getRunner(statement, [])
     .then((results: QueryResult) => {
       const { rows } = results;
       if (rows.length <= 0) {
