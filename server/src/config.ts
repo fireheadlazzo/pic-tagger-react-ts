@@ -16,19 +16,10 @@ nconf.defaults({
   SQL_DATABASE: "postgres",
   SQL_HOST: "",
   SQL_PASSWORD: "",
-  SQL_PORT: "",
+  SQL_PORT: "1234",
   // hard-coded constants
   LIST_IMAGES_MAX_PAGE_SIZE: 32,
   LIST_TAGS_MAX_PAGE_SIZE: 32,
 });
-
-console.log(`checking config variables:`);
-console.log(`PROJECT_NAME: ${nconf.get("PROJECT_NAME")}`);
-console.log(`IMAGE_BUCKET: ${nconf.get("IMAGE_BUCKET")}`);
-console.log(`SQL_USER: ${nconf.get("SQL_USER")}`);
-console.log(`SQL_DATABASE: ${nconf.get("SQL_DATABASE")}`);
-console.log(`SQL_HOST: ${nconf.get("SQL_HOST")}`);
-console.log(`SQL_PASSWORD: ${nconf.get("SQL_PASSWORD")}`);
-console.log(`SQL_PORT: ${nconf.get("SQL_PORT")}`);
 
 export default nconf;
