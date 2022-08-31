@@ -20,7 +20,7 @@ export function sendImageToGCS(
   next: NextFunction
 ) {
   if (!req.file) {
-    console.error("No file on upload request!")
+    console.error("sendImageToGCS - No file on upload request")
     return next();
   }
 

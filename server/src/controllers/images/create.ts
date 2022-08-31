@@ -19,7 +19,6 @@ export function createImage(
   }
 
   const item = new Image(file);
-  // images start with no tags
   item.tags = [];
   item.filename = file.path;
   item.bucket = file.bucket;
