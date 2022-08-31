@@ -24,7 +24,7 @@ export const tagsRoute = "t";
 // export const implicationsRoute = "im";
 // export const usersRoute = "u";
 // export const collectionsRoute = "c";
-// export const seriessRoute = "s";
+// export const seriesRoute = "s";
 
 /**
  * Tag Types

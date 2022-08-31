@@ -6,10 +6,11 @@ export class QueryOptions {
       value.limit && value.limit <= config.get("LIST_IMAGES_MAX_PAGE_SIZE")
         ? value.limit
         : config.get("LIST_IMAGES_MAX_PAGE_SIZE");
+    // TODO: Will this break if value is undefined?
     this.ascending =
       value.ascending === "true" || value.ascending === true ? true
       : value.ascending === "false" || value.ascending === false ? false
-      : true;
+      : false;
     this.offset = Number(value.offset) || 0;
     this.orderBy = value.orderBy ? String(value.orderBy) : "created_at";
   }
