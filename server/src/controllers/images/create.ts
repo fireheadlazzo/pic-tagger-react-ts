@@ -10,10 +10,10 @@ export function createImage(
   next: NextFunction
 ) {
   console.log(
-    `Creating new image for file [${req.file.bucket}/${req.file.path}]`
+    `Creating new image for file [${req.file?.bucket}/${req.file?.path}]`
   );
   const { file } = req;
-  if (!file.originalname || !file.bucket || !file.path) {
+  if (!file || !file.originalname || !file.bucket || !file.path) {
     const error = new Error("Cloud Storage keys not found on file");
     return next(error);
   }
