@@ -36,13 +36,13 @@ export function sendImageToGCS(
 
   const onSreamError = (err: Error) => {
     console.error(err.message);
-    req.file.cloudStorageError = err,
+    req.file!.cloudStorageError = err,
     next(err);
   }
   const onSreamFinish = () => {
     console.log("Upload complete");
-    req.file.bucket = config.get("IMAGE_BUCKET");
-    req.file.path = filePath;
+    req.file!.bucket = config.get("IMAGE_BUCKET");
+    req.file!.path = filePath;
     next();
   }
 
