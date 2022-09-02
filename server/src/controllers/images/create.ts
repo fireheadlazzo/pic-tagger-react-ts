@@ -21,7 +21,6 @@ export function createImage(
   const item = new Image(file);
   item.tags = [];
   item.filename = file.path;
-  item.bucket = file.bucket;
   item.details = {
     metadata: {
       height: 0,

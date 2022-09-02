@@ -16,7 +16,6 @@ export class Image {
 
     this.id = Number(value.id)
     this.filename = value.filename || value.path; // filename = existing Image; path = fresh upload from GCS
-    this.bucket = value.bucket;
     this.tags = value.tags;
     this.details = value.details;
     this.created_at = value.created_at;
@@ -28,7 +27,6 @@ export class Image {
 
   public id?: number;
   public filename?: string;
-  public bucket?: string;
   public tags?: number[];
   public details?: IDetails;
   public created_at?: Date;
@@ -38,7 +36,7 @@ export class Image {
   public updated_by?: string;
 
   public static primaryKey: string = "id";
-  public static columns: string[] = ["filename", "bucket", "tags", "details", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
+  public static columns: string[] = ["filename", "tags", "details", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
   public static editableColumns: string[] = ["tags", "details"];
   public static requiredKeysPost: string[] = ["file"];
 
@@ -54,7 +52,6 @@ export class Image {
     return {
       id: this.id,
       filename: this.filename,
-      bucket: this.bucket,
       tags: this.tags ? JSON.stringify(this.tags) : JSON.stringify([]),
       details: JSON.stringify(this.details),
       created_at: new Date(),
@@ -70,7 +67,6 @@ export class Image {
     return {
       id: value.id,
       filename: value.filename,
-      bucket: value.bucket,
       tags: value.tags, // TODO: Parse?
       created_at: value.created_at,
       updated_at: value.deleted_at,
