@@ -39,11 +39,20 @@ export class Image {
 
   public static primaryKey: string = "id";
   public static columns: string[] = ["filename", "bucket", "tags", "details", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
+  public static editableColumns: string[] = ["tags", "details"];
   public static requiredKeysPost: string[] = ["file"];
+
+  public toUpdateObj(values: any): Image {
+    Image.editableColumns.forEach((key: string) => {
+      this[key as keyof Image] === values[key];
+    });
+    return this;
+  }
 
   // Used to convert class values to database-digestible format
   public toDB() {
     return {
+      id: this.id,
       filename: this.filename,
       bucket: this.bucket,
       tags: this.tags ? JSON.stringify(this.tags) : JSON.stringify([]),
@@ -62,8 +71,7 @@ export class Image {
       id: value.id,
       filename: value.filename,
       bucket: value.bucket,
-      tags: value.tags,
-      details: value.details,
+      tags: value.tags, // TODO: Parse?
       created_at: value.created_at,
       updated_at: value.deleted_at,
       deleted_at: value.deleted_at,

@@ -1,5 +1,5 @@
 import express from "express";
-import { createImage, getImage, listImages } from "controllers/images";
+import { createImage, getImage, listImages, updateImage } from "controllers/images";
 import { createTag, getTag, listTags } from "controllers/tags";
 import * as storage from "services/cloudstorage";
 import * as middleware from "middlewares/index"; // TODO: Can I get rid of this /index?
@@ -21,6 +21,13 @@ app.post(`/${constants.imagesRoute}/?`,
   storage.sendImageToGCS,
   createImage
 );
+
+app.put(
+  `/${constants.imagesRoute}/`,
+  middleware.loadImageById,
+  updateImage
+);
+
 /**
  * Tags
  */
