@@ -12,7 +12,7 @@ export * from "./methods/save-tag";
 // PATCH by id
 //
 // PUT by id
-//
+export * from "./methods/update-image";
 // PUT by ids
 // (might need to be specific here)
 // DELETE by id
