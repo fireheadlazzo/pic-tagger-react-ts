@@ -1,7 +1,6 @@
 CREATE TABLE IF NOT EXISTS public.images
 (
     id BIGSERIAL PRIMARY KEY NOT NULL,
-    bucket VARCHAR(128) NOT NULL,
     filename VARCHAR(128) NOT NULL,
     tags JSONB DEFAULT '[]' NOT NULL,
     details JSONB DEFAULT '{}' NOT NULL,
