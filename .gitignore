@@ -9,11 +9,13 @@ server/build
 
 # credentials
 **/cs-credentials.json
+**/*-credentials.json
 
 # misc
 .DS_Store
 .vscode
 .idea
+.eslintcache
 scratch.json
 
 npm-debug.log*
