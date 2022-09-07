@@ -5,7 +5,7 @@ import StatusCode from "http-status";
 import { StatusError } from "models/status-error";
 import { NextFunction, Request, Response } from "express";
 import { Bucket, Storage } from "@google-cloud/storage";
-import { UploadRequest} from "models/interfaces/upload-request";
+import { CloudStorageFileError, UploadRequest } from "models/interfaces/upload-request";
 import { validFileExtensions } from "models/constants";
 import { v4 as uuidv4 } from "uuid";
 
@@ -34,15 +34,15 @@ export function sendImageToGCS(
     metadata: { contentType: req.file.mimetype }
   });
 
-  const onSreamError = (err: Error) => {
+  const onSreamError = (err: CloudStorageFileError) => {
     console.error(err.message);
-    req.file!.cloudStorageError = err,
+    req.file!.cloudStorageError = err;
     next(err);
   }
   const onSreamFinish = () => {
     console.log("Upload complete");
     req.file!.bucket = config.get("IMAGE_BUCKET");
-    req.file!.path = filePath;
+    req.file!.filepath = filePath;
     next();
   }
 

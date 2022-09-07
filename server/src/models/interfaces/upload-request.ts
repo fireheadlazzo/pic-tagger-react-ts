@@ -1,9 +1,13 @@
-// TODO: Fix these optional properties. Not everything should be optional
+export interface CloudStorageFileError extends Error {
+  message: string
+}
+
+interface ImageFile extends Express.Multer.File {
+  cloudStorageError?: CloudStorageFileError;
+  bucket?: string;
+  filepath?: string;
+}
+
 export interface UploadRequest {
-  file?: {
-    cloudStorageError?: Error,
-    originalname?: string;
-    bucket?: string;
-    path?: string;
-  }
+  file?: ImageFile;
 }
