@@ -41,8 +41,7 @@ export function sendImageToGCS(
   }
   const onSreamFinish = () => {
     console.log("Upload complete");
-    req.file!.bucket = config.get("IMAGE_BUCKET");
-    req.file!.filepath = filePath;
+    req.file!.filename = filePath;
     next();
   }
 

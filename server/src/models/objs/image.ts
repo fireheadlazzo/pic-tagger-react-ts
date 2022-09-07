@@ -2,22 +2,23 @@ interface IDetails {
   metadata: {
     height: number;
     width: number;
-  },
-  uploadInfo: {
     originalName: string;
-  }
-};
+    encoding: string;
+    mimetype: string;
+    size: number;
+  },
+}
 
 export class Image {
-  constructor(value?: any) {
-    if (!value) {
+  constructor(value?: any, file?: Express.Multer.File) {
+    if (!value || !file) {
       return;
     }
 
     this.id = Number(value.id)
-    this.filename = value.filename || value.path; // filename = existing Image; path = fresh upload from GCS
-    this.tags = value.tags;
-    this.details = value.details;
+    this.filename = file.filename
+    this.tags = value.tags || [];
+    this.details = value.details || {};
     this.created_at = value.created_at;
     this.updated_at = value.updated_at;
     this.deleted_at = value.deleted_at;
