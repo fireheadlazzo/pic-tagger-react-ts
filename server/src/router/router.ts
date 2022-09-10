@@ -18,6 +18,7 @@ app.get(`/${constants.imagesRoute}/?`, listImages);
 app.post(`/${constants.imagesRoute}/?`,
   storage.multer.single("file"),
   middleware.checkKeys.images.POST,
+  // middleware.processImage,
   storage.sendImageToGCS,
   createImage
 );
