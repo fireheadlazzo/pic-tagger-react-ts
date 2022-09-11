@@ -11,12 +11,13 @@ interface IDetails {
 
 export class Image {
   constructor(value?: any, file?: Express.Multer.File) {
-    if (!value || !file) {
+    // TODO Fix this. Image should not need a file buffer
+    if (!value && !file) {
       return;
     }
 
     this.id = Number(value.id)
-    this.filename = file.filename
+    this.filename = file?.filename || value.filename
     this.tags = value.tags || [];
     this.details = value.details || {};
     this.created_at = value.created_at;
