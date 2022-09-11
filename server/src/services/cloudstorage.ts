@@ -42,7 +42,11 @@ export function sendImageToGCS(
   const onSreamFinish = () => {
     console.log("Upload complete");
     req.file!.filename = filePath;
-    next();
+    file.makePublic()
+      .then(() => {
+        next();
+      })
+      .catch(next);
   }
 
   stream.on("error", onSreamError);
