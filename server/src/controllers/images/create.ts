@@ -4,8 +4,11 @@ import { UploadRequest } from "models/interfaces/upload-request";
 import { Image } from "models/objs/image";
 import * as sql from "services/sql";
 import config from "config";
+import sharp from "sharp";
 
-export function createImage(
+const BUCKET = "pic-tagger-v2-images";
+
+export async function createImage(
   req: Request & UploadRequest,
   res: Response,
   next: NextFunction
@@ -19,19 +22,27 @@ export function createImage(
     return next(error);
   }
 
+  const imageMetadata = await sharp(file.buffer)
+    .metadata()
+    .then(result => {
+      return result;
+    });
+
   const imageData = {
     details: {
       metadata: {
-        height: 0,
-        width: 0,
+        height: imageMetadata.height,
+        width: imageMetadata.width,
         originalName: file.originalname,
         encoding: file.encoding,
         mimetype: file.mimetype,
         size: file.size,
       },
-    }
+      lastSourceAttempt: undefined,
+    },
+    url: `https://storage.googleapis.com/${BUCKET}/${file.filename}`
   };
-  const item = new Image(imageData, file);
+  const item = new Image(imageData);
 
   return sql
     .saveImage(item)

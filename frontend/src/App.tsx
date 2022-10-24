@@ -25,9 +25,7 @@ class App extends React.Component<any, any> {
         console.log("response", response);
         this.setState({
           images: response.data.map((image: any) => {
-            return {
-              url: `https://storage.googleapis.com/pic-tagger-v2-images/${image?.filename}`
-            };
+            return { url: image?.url };
           })
         });
       })

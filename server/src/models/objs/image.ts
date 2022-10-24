@@ -7,17 +7,17 @@ interface IDetails {
     mimetype: string;
     size: number;
   },
+  lastSourceAttempt: Date,
 }
 
 export class Image {
-  constructor(value?: any, file?: Express.Multer.File) {
-    // TODO Fix this. Image should not need a file buffer
-    if (!value && !file) {
+  constructor(value?: any) {
+    if (!value) {
       return;
     }
 
     this.id = Number(value.id)
-    this.filename = file?.filename || value.filename
+    this.url = value.url;
     this.tags = value.tags || [];
     this.details = value.details || {};
     this.created_at = value.created_at;
@@ -28,7 +28,7 @@ export class Image {
   }
 
   public id?: number;
-  public filename?: string;
+  public url?: string;
   public tags?: number[];
   public details?: IDetails;
   public created_at?: Date;
@@ -38,7 +38,7 @@ export class Image {
   public updated_by?: string;
 
   public static primaryKey: string = "id";
-  public static columns: string[] = ["filename", "tags", "details", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
+  public static columns: string[] = ["url", "tags", "details", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
   public static editableColumns: string[] = ["tags", "details"];
   public static requiredKeysPost: string[] = ["file"];
 
@@ -53,7 +53,7 @@ export class Image {
   public toDB() {
     return {
       id: this.id,
-      filename: this.filename,
+      url: this.url,
       tags: this.tags ? JSON.stringify(this.tags) : JSON.stringify([]),
       details: JSON.stringify(this.details),
       created_at: new Date(),
@@ -68,7 +68,7 @@ export class Image {
   public fromDB(value: any) {
     return {
       id: value.id,
-      filename: value.filename,
+      url: value.url,
       tags: value.tags, // TODO: Parse?
       created_at: value.created_at,
       updated_at: value.deleted_at,
