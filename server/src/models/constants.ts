@@ -32,29 +32,35 @@ export const tagsRoute = "t";
  */
 export enum tagTypes {
   // for everyday tagging purposes. Signifies individual visual elements of the image
-  GENERAL = 0,
-  // signifies the artist, photographer, and/or editor of an image
-  ARTIST = 1,
+  GENERAL = "general",
+  // signifies the artist, modeler, and/or photographer of an image
+  ARTIST = "artist",
   // Signifies the title of the source material or series that the subject is derived from 
-  SOURCE = 2,
+  SOURCE = "source",
   // signifies the name of a person or character depicted in the image
-  CHARACTER = 3,
+  CHARACTER = "character",
   // Signifies the overarching group associated with the image. This is common with studio-produced images without a single common creator
-  GROUP = 4,
+  GROUP = "group",
   // names the person/s who did not create the piece, but paid for or encouraged its creation
-  COMMISSIONER = 5,
-  // signifies characterisics of the image itself, such as general size, format, date, and style
-  META = 6
+  COMMISSIONER = "commissioner",
+  // signifies the editor of an image
+  EDITOR = "editor",
+  // signifies characteristics of the image itself, such as general size, format, date, and style
+  META = "meta",
+  // misc tag
+  OTHER = "other"
 }
 
 export const validTagTypes = [
   tagTypes.GENERAL,
-  tagTypes.SOURCE,
-  tagTypes.GROUP,
   tagTypes.ARTIST,
+  tagTypes.SOURCE,
   tagTypes.CHARACTER,
+  tagTypes.GROUP,
   tagTypes.COMMISSIONER,
-  tagTypes.META
+  tagTypes.EDITOR,
+  tagTypes.META,
+  tagTypes.OTHER,
 ];
 
 // file extensions accepted by multer. This DOES NOT prevent files from being purposely misnamed

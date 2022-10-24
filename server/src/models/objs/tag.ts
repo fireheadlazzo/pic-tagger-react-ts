@@ -6,9 +6,9 @@ export class Tag {
       return;
     }
 
-    this.id = Number(value.id)
+    this.id = value.id ? Number(value.id) : undefined
     this.name = value.name;
-    this.type = Number(value.type);
+    this.type = value.type;
     this.images = value.images;
     this.created_at = value.created_at;
     this.updated_at = value.updated_at;
@@ -29,8 +29,8 @@ export class Tag {
 
   public static primaryKey: string = "id";
   public static columns: string[] = ["name", "type", "images", "created_at", "updated_at", "deleted_at", "created_by", "updated_by"];
-  public static requiredKeysPost: string[] = ["name"];
-  public static defaultType: number = tagTypes.GENERAL;
+  public static requiredKeysPost: string[] = ["name", "type"];
+  public static defaultType: string = tagTypes.GENERAL;
 
   // Used to convert class values to database-digestible format
   public toDB() {
