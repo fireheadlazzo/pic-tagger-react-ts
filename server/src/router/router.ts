@@ -13,7 +13,13 @@ console.log("Defining routes");
  */
 app.get(`/${constants.imagesRoute}/:id`, getImage);
 
-app.get(`/${constants.imagesRoute}/?`, listImages);
+app.get(`/${constants.imagesRoute}/?`,
+  (req, res, next) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    next();
+  },
+  listImages
+);
 
 app.post(`/${constants.imagesRoute}/?`,
   storage.multer.single("file"),
