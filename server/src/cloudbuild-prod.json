@@ -27,7 +27,7 @@
       "dir": "server/src"
     },
     {
-      "name": "node:13",
+      "name": "node:14",
       "entrypoint": "npm",
       "args": [
         "run",
